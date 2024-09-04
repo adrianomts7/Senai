@@ -19,5 +19,8 @@ class Pet:
          )
         
 dig = Pet("Dig",8,"Pinsher","Pequeno","Ração")
+dex = Pet("Dex",5,"vira-lata","Grande","Comida")
 
 print(dig.exibir_dados())
+print()
+print(dex.exibir_dados())
