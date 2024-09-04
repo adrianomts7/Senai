@@ -10,7 +10,7 @@ class Endereco:
     #Semelhante ao ToString()
     def __str__(self) -> str:
         return (
-            f"Logradouro: {self.logradouro}"
+            f"\nLogradouro: {self.logradouro}"
             f"\nNúmero: {self.numero}"
             )
     
@@ -18,7 +18,7 @@ class Aluno:
     def __init__(self,nome: str,idade: int,endereco: Endereco) -> None:
         self.nome = nome
         self.idade = idade
-        self.endereco = Endereco
+        self.endereco = endereco
     
     def __str__(self) -> str:
         return (
