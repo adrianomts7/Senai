@@ -32,5 +32,4 @@ class Funcionario:
                 )
 
 f1 = Funcionario("172681","Marta",5007.90,Setor.FINANCEIRO,Sexo.FEMININO,22)
-print(f1)    
-
+print(f1)   
