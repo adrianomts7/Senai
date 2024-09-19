@@ -1,4 +1,7 @@
-from models.enums.sexo import Sexo
-from models.pessoa import Pessoa
+import os
 
-pessoa = Pessoa("Marta",22,Sexo.FEMININO)
+
+os.system("cls||clear")
+
+if __name__ == "__main__":
+    os.system("pytest")

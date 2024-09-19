@@ -1,4 +1,4 @@
-from models.enums.sexo import Sexo
+from estruturadeprojetos.projeto.models.enums.sexo import Sexo
 
 class Pessoa:
     def __init__(self,nome: str,idade: int,sexo: Sexo) -> None:
