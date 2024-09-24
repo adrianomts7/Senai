@@ -1,6 +1,6 @@
 import pytest
-from estruturadeprojetos.projeto_com_teste.models.enums.sexo import Sexo
-from estruturadeprojetos.projeto_com_teste.models.pessoa import Pessoa
+from projeto_com_teste.models.enums.sexo import Sexo
+from projeto_com_teste.models.pessoa import Pessoa
 
 @pytest.fixture
 def pessoa_valida():

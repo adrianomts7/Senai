@@ -6,7 +6,7 @@ def conta_valida():
     return Conta(222,333)
 
 def test_numero_conta_valor(conta_valida):
-    assert conta_valida._numero_conta == 222
+    assert conta_valida.numero_conta == 222
 
 def test_agencia_valida(conta_valida):
     assert conta_valida._agencia == 333

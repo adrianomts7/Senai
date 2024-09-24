@@ -1,4 +1,4 @@
-from estruturadeprojetos.projeto_com_teste.models.enums.sexo import Sexo
+from projeto_com_teste.models.enums.sexo import Sexo
 
 class Pessoa:
    
@@ -9,7 +9,7 @@ class Pessoa:
 
     def set_idade(self,idade):
         if idade < 0:
-            self._idade
+            self._idade = 0
         else:
             self._idade = idade
     
