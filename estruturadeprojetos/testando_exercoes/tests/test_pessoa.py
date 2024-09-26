@@ -22,3 +22,7 @@ def test_pessoa_idade_acima_130_retorna_mensagem():
 def test_pessoa_idade_tipo_invalido_retorna_mensagem():
     with pytest.raises(TypeError, match="A idade deve ser um numero inteiro"):
         Pessoa("Marta","22")
+
+def test_pessoa_nome_tipo_invalido_retorna_mensagem():
+    with pytest.raises(TypeError, match="O nome deve ser em texto."):
+        Pessoa(22,22)
