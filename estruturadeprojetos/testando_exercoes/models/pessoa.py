@@ -22,11 +22,11 @@ class Pessoa:
             raise TypeError("A idade deve ser um numero inteiro")
 
     def __verificar_idade_negativa(self,valor):
-        if valor < 0:
+        if valor <= 0:
             raise ValueError("A idade não pode ser negativa")
     
     def __verificar_idade_acima_130(self,valor):
-        if valor > 130:
+        if valor >= 130:
             raise ValueError("A idade não pode ser maior que 130 Anos")
         
     def _verificar_nome_tipo_invalido(self,valor):
