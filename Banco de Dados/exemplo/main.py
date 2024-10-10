@@ -33,11 +33,28 @@ os.system("cls || clear")
 Base.metadata.create_all(bind=db)
 
 # Salvar no banco de dados.
-usuario = Usuario(nome="Marta",email="marta@gmaill.com",senha="123")
-session.add(usuario)
-session.commit()
+for i in range(2):
+    nome = input("Digite o seu nome: ")
+    email = input("Digite o seu email: ")
+    senha = input("Digite a sua senha: ")
+
+    os.system("cls || clear")
+    usuario = Usuario(nome=nome,email=email,senha=senha)
+    session.add(usuario)
+    session.commit()
 
 # Mostrando conteúdos do banco de dados
+lista_usuarios = session.query(Usuario).all()
+
+for usuario in lista_usuarios:
+    print(f"{usuario.id} - {usuario.nome} - {usuario.email} - {usuario.senha}")
+
+# Deletando um usuario
+usuario = session.query(Usuario).filter_by(email="adriano@gmail.com").first()
+session.delete(usuario)
+session.commit()
+
+# Atualizando a lista após deletar o usuario
 lista_usuarios = session.query(Usuario).all()
 
 for usuario in lista_usuarios:
