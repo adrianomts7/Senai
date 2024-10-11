@@ -44,18 +44,55 @@ for i in range(2):
     session.commit()
 
 # Mostrando conteúdos do banco de dados
+print("Listando Usuario do banco de dados")
 lista_usuarios = session.query(Usuario).all()
 
 for usuario in lista_usuarios:
     print(f"{usuario.id} - {usuario.nome} - {usuario.email} - {usuario.senha}")
 
 # Deletando um usuario
-usuario = session.query(Usuario).filter_by(email="adriano@gmail.com").first()
-session.delete(usuario)
-session.commit()
+print("\nExcluindo usuario do banco de dados.")
+email_usuario = input("Informe o email do usuario: ")
+usuario = session.query(Usuario).filter_by(email=email_usuario).first()
+
+if usuario:
+    session.delete(usuario)
+    session.commit()
+    print("\nUsuario deletado com sucesso")
+else: 
+    print("\nUsuario não foi deletado")
 
 # Atualizando a lista após deletar o usuario
+print("\nLista atualizadaq após deletar usuario no banco de dados")
 lista_usuarios = session.query(Usuario).all()
 
 for usuario in lista_usuarios:
     print(f"{usuario.id} - {usuario.nome} - {usuario.email} - {usuario.senha}")
+
+# Atualizar usuario
+print("Atualizando dados do usuario")
+email_usuario = input("Informe o email do usuario: ")
+
+usuario = session.query(Usuario).filter_by(email=email_usuario).first()
+
+if usuario:
+    usuario.nome = input("Digite o seu nome: ")
+    usuario.email = input("Digite o seu email: ")
+    usuario.senha = input("Digite sua senha: ")
+    session.commit()
+
+else:
+    print("\nUsuario não encontrado.")
+
+# Pesquisando um usuario
+print("\nPesquisando o Usuario")
+email_usuario = input("Informe o email do usuario: ")
+
+usuario = session.query(Usuario).filter_by(email=email_usuario).first()
+if usuario:
+    print(f"{usuario.id} - {usuario.nome} - {usuario.email}")
+else:
+    print("\nUsuario não encontrado")
+
+# Fechando conexão 
+session.close()
