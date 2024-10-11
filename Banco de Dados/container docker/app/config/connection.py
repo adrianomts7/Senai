@@ -19,7 +19,7 @@ session = Session()
 
 @contextmanager
 def get_db():
-    sb = Session()
+    db = Session()
 
     try:
         yield db
