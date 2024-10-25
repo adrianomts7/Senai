@@ -5,9 +5,9 @@ class AlunosServices:
     def __init__(self, repositorio: AlunoRepository) -> None:
         self.repositorio = repositorio
 
-    def criar_aluno(self, nome: str, email: str, senha: str):
+    def criar_aluno(self, ra: str,nome: str, sobrenome: str, email: str, senha: str):
         try:
-            aluno = Aluno(nome=nome, email=email, senha=senha)
+            aluno = Aluno(ra=ra, nome=nome,sobrenome=sobrenome ,email=email, senha=senha)
             self.repositorio.salvar_aluno(aluno)
             print("Aluno Salvo com sucesso")
         except TypeError as erro:
