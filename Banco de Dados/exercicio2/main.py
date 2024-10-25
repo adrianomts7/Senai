@@ -12,6 +12,11 @@ sobrenome = str(input("Digite o seu sobrenome: "))
 email = str(input("Digite o seu e-mail: "))
 senha = str(input("Digite a sua senha: "))
 
-services.criar_aluno(ra=ra, nome=ra, sobrenome=sobrenome, email=email, senha=senha)
+services.criar_aluno(ra=ra, nome=nome, sobrenome=sobrenome, email=email, senha=senha)
+
+alunos = services.listar_todos_alunos()
+
+for aluno in alunos:
+    print(f"{aluno.ra} - {aluno.nome} - {aluno.sobrenome}")
 
 
