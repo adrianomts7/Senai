@@ -4,8 +4,8 @@ from config.connection import Session
 
 def main():
     session = Session()
-    repository = usuarioRepository
-    service = UsuarioService
+    repository = usuarioRepository()
+    service = UsuarioService(repository)
 
     service.criar_usuario("Marta","marta@gmail.com","123")
 
