@@ -134,6 +134,11 @@ public class CadastroPessoaView extends javax.swing.JFrame {
         Limpar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         Limpar.setForeground(new java.awt.Color(255, 255, 255));
         Limpar.setText("Limpar");
+        Limpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimparActionPerformed(evt);
+            }
+        });
 
         tbLista.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tbLista.setModel(new javax.swing.table.DefaultTableModel(
@@ -259,9 +264,52 @@ public class CadastroPessoaView extends javax.swing.JFrame {
     }//GEN-LAST:event_SalvarActionPerformed
 
     private void RemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverActionPerformed
-        // TODO add your handling code here:
+        int linha = tbLista.getSelectedRow();
+        
+        if (linha == -1) {
+            JOptionPane.showMessageDialog(null, "Selecione uma pessoa para remover");
+        }
+        
+        ArrayList<Pessoa> lista = controller.listar();
+        lista.remove(linha);
+        atualizarTabela();
+        limparCampo();
+        
+        
+        
     }//GEN-LAST:event_RemoverActionPerformed
-
+    
+    private void atualizarTabela() {
+            modeloTabela.setRowCount(0);
+            for(Pessoa p : controller.listar()) {
+                modeloTabela.addRow(new Object[]{ p.getNome(),p.getIdade() });
+            }   
+    }
+        
+    private void limparCampo() {
+            txtNome.setText("");
+            txtIdade.setText("");
+            tbLista.clearSelection();
+    }
+    
+    private void filtrarTabela() {
+        String termo = txtBuscar.getText().trim().toLowerCase();
+        modeloTabela.setRowCount(0);
+        
+        ArrayList<Pessoa> listaOriginal = controller.listar();
+        
+        for (Pessoa p : listaOriginal) {
+            if( p.getNome().toLowerCase().contains(termo) ) {
+                modeloTabela.addRow(new Object[]{ p.getNome(), p.getIdade() });
+            }
+        }    
+        
+        if (termo.isEmpty()) {
+            atualizarTabela();
+        }
+        
+    }
+    
     private void AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarActionPerformed
        int linha = tbLista.getSelectedRow();
        
@@ -298,6 +346,13 @@ public class CadastroPessoaView extends javax.swing.JFrame {
        }
        
     }//GEN-LAST:event_AlterarActionPerformed
+
+    private void LimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimparActionPerformed
+        txtBuscar.setText("");
+        txtNome.setText("");
+        txtIdade.setText("");
+        tbLista.clearSelection();
+    }//GEN-LAST:event_LimparActionPerformed
 
     /**
      * @param args the command line arguments
