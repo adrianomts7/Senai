@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Clientes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        html {
+            font-size: 62.5%;
+        }
+
+        /* Criando um container onde vai ficar o formulario */
+        .container {
+            max-width: 40rem;
+            margin: 5rem auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        /* div onde fica o input e label */
+        .input--form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            width: 100%;
+        }
+
+        label {
+            font-size: 1.5rem;
+        }
+
+        input {
+            padding: 0.6rem 0.8rem;
+            border: 1px solid #007bff;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #007bff;
+            text-align: center;
+            font-size: 2.8rem;
+        }
+
+        table {
+            width: 65%;
+            margin: 1.2rem auto;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+        
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        th, td {
+            padding: 10px;
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 500;
+        }
+        
+        .btn--enviar{
+            width: 100%;
+            margin-top: 10px;
+            padding: 1rem 0;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            border-radius: 100vw;
+            font-weight: 700;
+        }   
+        
+        button:hover {
+            background-color: #218838;
+        }
+        
+        .btn-excluir {
+            background-color: #dc3545;
+            text-align: center;
+            border: none;
+            border-radius: 100vw;
+            color: #fff;
+            font-weight: 600;
+            width: 100%;
+            padding: 1rem 0;
+        }
+        .btn-excluir:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Container onde fica o formulario para melhorar a estilização -->
+    <div class="container">
+        <h2>Cadastro de Clientes</h2>
+
+        <!-- Div para ficar label e o input  -->
+        <div class="input--form">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" placeholder="Digite o seu nome">
+        </div>
+        
+        <div class="input--form">
+            <label for="telefone">Telefone:</label>
+            <input type="text" id="telefone" placeholder="(11) 2 3451-1211">
+        </div>
+
+        <div class="input--form">
+            <label for="Email">Email:</label>
+            <input type="email" id="Email" placeholder="usuario@usario.com" required>
+        </div>
+
+        <button class="btn--enviar" onclick="adicionarCliente()">Adicionar</button>
+    </div>
+    
+    <table>
+        
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Email</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+
+        <tbody id="listaClientes"></tbody>
+    </table>
+
+    <script>
+        function adicionarCliente() {
+            // Pegando os valores digitados pelo usuario
+            let nome = document.getElementById('nome').value;
+            let telefone = document.getElementById('telefone').value;
+            let email = document.getElementById('Email').value;
+
+            // Fazendo a verficação, se os campos estiver vázia 
+            if (!nome || !telefone || !email) return alert('Preencha todos os campos!');
+            
+            // Verificando o tamanho do telefone digitado pelo usuário
+            if (telefone.length !== 11) return alert('Tamanho de telefone inválido');
+
+            // Transformando em número o telefone
+            telefone = Number(telefone);
+
+            // Fazendo a verificação se o telefone é número
+            if (typeof telefone !== 'number') return alert('Telefone só aceita números')
+
+            let tabela = document.getElementById('listaClientes');
+            let novaLinha = tabela.insertRow();
+
+            novaLinha.insertCell(0).innerText = nome;
+            novaLinha.insertCell(1).innerText = telefone;
+            novaLinha.insertCell(2).innerText = email;
+
+            let acaoCell = novaLinha.insertCell(3);
+            let botaoExcluir = document.createElement('button');
+            
+            botaoExcluir.innerText = 'Excluir';
+            botaoExcluir.classList.add('btn-excluir');
+            
+            botaoExcluir.onclick = function () {
+                // mandando um prompt para o usuario digitar, se ele deseja apagar, transformando tudo em minúscula e pegando a primeira letra digitada.
+                const excluir = prompt("Deseja apagar a tarefa (s/n) ").toLowerCase().charAt(0);
+
+                if (excluir === 's') tabela.deleteRow(novaLinha.rowIndex - 1);
+            };
+            
+            acaoCell.appendChild(botaoExcluir);
+            
+            document.getElementById('nome').value = '';
+            document.getElementById('telefone').value = '';
+            document.getElementById('Email').value = '';       
+        }
+    </script>
+</body>
+</html>
