@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de Sistema com Erros para Correção</title>
+    <link rel="stylesheet" href="style.css">k
+</head>
+<body>
+
+<h1>Sistema de Correção de Erros</h1>
+<p>Este sistema contém erros intencionais para que você os corrija.</p>
+
+<div class="area--form-calc">
+    <h2>1: Função de Cálculo</h2>
+    
+    <p class="resultado--calc"></p>
+
+    <form method="#" class="form--calc">    
+        
+        <div class="input--area">    
+            <label for="primeiroNumero">1º Número</label>
+            <input id="primeiroNumero" type="text" class="input--calculo-1" placeholder="Digite o primeiro número">
+        </div>
+        
+        <div class="input--area">    
+            <label for="segundoNumero">1º Número</label>
+            <input id="segundoNumero" type="text" class="input--calculo-2" placeholder="Digite o segundo número">
+        </div>
+        <button onclick="fixCalc(event)" class="btn--calc">Calcular</button>
+    
+    </form>
+    
+</div>
+
+<div class="form-section">
+    <p class="validacao--form"></p>
+    <h3>Documentação da Manutenção</h3>
+    <form id="maintenance-form">
+        <label for="date">Data da Manutenção:</label>
+        <input type="date" id="date" required>
+
+        <label for="error-type">Tipo de Manutenção:</label>
+        <input type="text" id="error-type" value="Corretiva" readonly>
+
+        <label for="description">Descrição da Manutenção:</label>
+        <textarea id="description" required></textarea>
+
+        <label for="responsible">Responsável:</label>
+        <input type="text" id="responsible" required>
+
+        <button type="button" onclick="generateReport()">Gerar Relatório</button>
+        <button type="button" onclick="limparCampos()">Limpar Campos</button>
+    </form>
+</div>
+
+<script src="script.js" ></script>
+
+</body>
+</html>
