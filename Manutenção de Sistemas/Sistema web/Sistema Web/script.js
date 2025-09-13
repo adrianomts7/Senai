@@ -3,9 +3,19 @@
 function msgError(classHtml, mensagem) {
    const mensagemErr = document.querySelector(classHtml);
    mensagemErr.style.color = 'red';
-   mensagemErr.style.fontWeight = '500';
+   mensagemErr.style.fontWeight = '600';
+   mensagemErr.style.margin = '1rem'
    mensagemErr.innerHTML = mensagem;
    return mensagemErr;
+}
+
+function msgSuccess(classHtl, mensagem) {
+    const mensagemSuccess = document.querySelector(classHtl);
+    mensagemSuccess.style.color = '#2b8a3e';
+    mensagemSuccess.style.fontWeight = '600';
+    mensagemSuccess.style.margin = '1rem'
+    mensagemSuccess.innerHTML = mensagem;
+    return mensagemSuccess;
 }
 
 function pegandoValores(idHtml) {
@@ -19,10 +29,17 @@ function fixCalc(e) {
     // Pegando os dados do formulario;  
     const input1 = Number(document.querySelector('.input--calculo-1').value);
     const input2 = Number(document.querySelector('.input--calculo-2').value);
+
+    if (!input1 && !input2) return msgError('.resultado--calc', 'Os campos da soma, não podem ficar vázio');
+
+    else if(!input1) return msgError('.resultado--calc', 'Digite o primeiro número válido');
+
+    else if (!input2) return msgError('.resultado--calc', 'Digite o segundo número válido');
+
     
     const result = input1 + input2;
-    document.querySelector(".resultado--calc").innerText = "Resultado correto: " + result;
-    
+    msgSuccess('.resultado--calc', `O resultado do calculo: ${result}`)
+
     document.querySelector('.input--calculo-1').value = '';
     document.querySelector('.input--calculo-2').value = '';
     
@@ -31,34 +48,32 @@ function fixCalc(e) {
 // Erro 2 - Validação de Formulário
 function fixFormValidation(date, description, responsible) {
 
-    // Erro intencional de validação - campos não são obrigatórios corretamente
     const form = document.getElementById("maintenance-form");
         
     if (!date && !description && !responsible) {
-        // document.querySelector('.validacao--form').innerHTML = 'Os campos não podem ficar vázio';  
-        msgError('.validacao--form', 'Os campos não podem ficar vázio');
-        return false
-    }
-
-    if (!date) {
-        msgError('.validacao--form', 'Digite uma data válida');
-        return false;  
-    }
-
-    if (!description) {  
-        msgError('.validacao--form', 'Descriçãoo não pode ficar vázia');
-        return false
-    }
-
-    if (description.length < 10) {
-        msgError('.validacao--form', 'Descrição inválida');   
+        msgError('.resultado--form', 'Os campos não podem ficar vázio');
+        return false;
+    } 
+    
+    else if (!date) {
+        msgError('.resultado--form', 'Digite uma data válida');
         return false;
     }
+        
+    else if (!description) {
+        msgError('.resultado--form', 'Descriçãoo não pode ficar vázia');
+        return false;
+    }   
 
-    if (!responsible) {
-        msgError('.validacao--form', 'Digite o seu nome');
+    else if (description.length < 10) {
+        msgError('.resultado--form', 'Descrição inválida');   
         return false;
     }
+  
+    else if (!responsible) {
+        msgError('.resultado--form', 'Digite o seu nome');
+        return false
+    } 
 
     return true
 }
@@ -66,17 +81,15 @@ function fixFormValidation(date, description, responsible) {
 // Gerar relatório de manutenção
 function generateReport() {
     
-    // const date = document.getElementById("date").value;
-    // const description = document.getElementById("description").value;
     const date = pegandoValores('date');
     const description = pegandoValores('description');
     const responsible = pegandoValores('responsible');
-    console.log(date, responsible, description);
+    const typeMaintenance = pegandoValores('error-type')
     
-    if(fixFormValidation(date, description, responsible)) {
+    if(fixFormValidation(date, description, responsible, typeMaintenance)) {
         const report = `Relatório de Manutenção
         Data: ${date}
-        Tipo de Manutenção: Corretiva
+        Tipo de Manutenção: ${typeMaintenance}
         Descrição: ${description}
         Responsável: ${responsible}`;
     
